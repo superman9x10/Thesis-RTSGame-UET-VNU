@@ -5,20 +5,42 @@ using Unity.Mathematics;
 using Unity.Physics;
 partial struct UnitMoverSystem : ISystem
 {
-    //[BurstCompile] 
+    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        foreach(var (localTransform, moveSpeed, physicsVelocity) in SystemAPI.Query<RefRW<LocalTransform>, RefRO<MoveSpeed>, RefRW<PhysicsVelocity>>())
+        UnitMoverJob job = new UnitMoverJob
         {
-            float3 targetPosition = MouseWorldPosition.Instance.GetPosition();
-            float3 moveDirection = targetPosition - localTransform.ValueRO.Position;
-            moveDirection = math.normalize(moveDirection);
+            deltaTime = SystemAPI.Time.DeltaTime
+        };
 
-            float rotationSpeed = 10f;
-
-            localTransform.ValueRW.Rotation = math.slerp(localTransform.ValueRO.Rotation, quaternion.LookRotation(moveDirection, math.up()), SystemAPI.Time.DeltaTime * rotationSpeed);
-            physicsVelocity.ValueRW.Linear = moveDirection * moveSpeed.ValueRO.value;
-            physicsVelocity.ValueRW.Angular = float3.zero;
-        }
+        job.ScheduleParallel();
     }
 }
+
+[BurstCompile]
+public partial struct UnitMoverJob : IJobEntity
+{
+    public float deltaTime;
+    public void Execute(ref LocalTransform localTransform, in UnitMover unitMover, ref PhysicsVelocity physicsVelocity)
+    {
+        float3 moveDirection = unitMover.targetPosition - localTransform.Position;
+        float reachedTargetDistanceSq = 2f;
+        
+        if(math.lengthsq(moveDirection) < reachedTargetDistanceSq)
+        {
+            physicsVelocity.Linear = float3.zero;
+            physicsVelocity.Angular = float3.zero;
+            return;
+        }
+
+        moveDirection = math.normalize(moveDirection);
+
+        localTransform.Rotation = math.slerp(
+            localTransform.Rotation,
+            quaternion.LookRotation(moveDirection, math.up()), deltaTime * unitMover.rotationSpeed);
+
+        physicsVelocity.Linear = moveDirection * unitMover.moveSpeed;
+        physicsVelocity.Angular = float3.zero;
+    }
+}
+
