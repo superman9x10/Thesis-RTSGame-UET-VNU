@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &325088244300178449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1028893879635097434}
+  m_Layer: 6
+  m_Name: bulletSpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1028893879635097434
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325088244300178449}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.274, y: 1.917, z: 1.971}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3042646929942737518}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &969894205508398080
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +165,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7412703117924355332, guid: 4dc2e6b2992b27e49b84553fd871b39e, type: 3}
+      propertyPath: range
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7412703117924355332, guid: 4dc2e6b2992b27e49b84553fd871b39e, type: 3}
+      propertyPath: targetFaction
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9063729248041709011, guid: 4dc2e6b2992b27e49b84553fd871b39e, type: 3}
       propertyPath: m_Name
       value: SoldierUnit
@@ -144,6 +183,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 310799399761305186, guid: 4dc2e6b2992b27e49b84553fd871b39e, type: 3}
       insertIndex: 0
       addedObject: {fileID: 910128306219037454}
+    - targetCorrespondingSourceObject: {fileID: 310799399761305186, guid: 4dc2e6b2992b27e49b84553fd871b39e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1028893879635097434}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 9063729248041709011, guid: 4dc2e6b2992b27e49b84553fd871b39e, type: 3}
       insertIndex: 3
@@ -151,6 +193,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9063729248041709011, guid: 4dc2e6b2992b27e49b84553fd871b39e, type: 3}
       insertIndex: 4
       addedObject: {fileID: 1439743310610610713}
+    - targetCorrespondingSourceObject: {fileID: 9063729248041709011, guid: 4dc2e6b2992b27e49b84553fd871b39e, type: 3}
+      insertIndex: 7
+      addedObject: {fileID: -6897268728229426293}
   m_SourcePrefab: {fileID: 100100000, guid: 4dc2e6b2992b27e49b84553fd871b39e, type: 3}
 --- !u!4 &3042646929942737518 stripped
 Transform:
@@ -188,3 +233,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c636b02c569b6bd4f9e80463222e9276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-6897268728229426293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6026199558245974495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66580c27b3355aa4b8aecbd66c5b3e7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerMax: 0.2
+  damageAmount: 5
+  attackDistance: 13
+  bulletSpawnPositionTransform: {fileID: 1028893879635097434}

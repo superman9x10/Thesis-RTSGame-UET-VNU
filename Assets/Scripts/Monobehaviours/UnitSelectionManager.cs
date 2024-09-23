@@ -87,7 +87,6 @@ public class UnitSelesctionManager : MonoBehaviour
                 CollisionWorld collisionWorld = physicsWorldSingleton.CollisionWorld;
 
                 UnityEngine.Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-                int unitsLayer = 6;
 
                 RaycastInput rayCastInput = new RaycastInput
                 {
@@ -96,14 +95,14 @@ public class UnitSelesctionManager : MonoBehaviour
                     Filter = new CollisionFilter
                     {
                         BelongsTo = ~0u,
-                        CollidesWith = 1u << unitsLayer,
+                        CollidesWith = 1u << GameAssets.UNIT_LAYER,
                         GroupIndex = 0
                     }
                 };
 
                 if (collisionWorld.CastRay(rayCastInput, out Unity.Physics.RaycastHit rayCastHit))
                 {
-                    if (entityManager.HasComponent<Unit>(rayCastHit.Entity))
+                    if (entityManager.HasComponent<Unit>(rayCastHit.Entity) && entityManager.HasComponent<Selected>(rayCastHit.Entity))
                     {
                         entityManager.SetComponentEnabled<Selected>(rayCastHit.Entity, true);
 
