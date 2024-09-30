@@ -39,7 +39,7 @@ partial struct ShootAttackSystem : ISystem
 
             Entity bulletEntity = state.EntityManager.Instantiate(entitiesReferences.bulletPrefabEntity);
             float3 bulletSpawnWorldPosition = localTransform.ValueRO.TransformPoint(shootAttack.ValueRO.bulletSpawnLocalPosition);
-            SystemAPI.SetComponent(bulletEntity, LocalTransform.FromPosition(/*localTransform.ValueRO.Position*/bulletSpawnWorldPosition));
+            SystemAPI.SetComponent(bulletEntity, LocalTransform.FromPosition(bulletSpawnWorldPosition));
             
             RefRW<Bullet> bulletBullet = SystemAPI.GetComponentRW<Bullet>(bulletEntity);
             bulletBullet.ValueRW.damageAmount = shootAttack.ValueRO.damageAmount;
