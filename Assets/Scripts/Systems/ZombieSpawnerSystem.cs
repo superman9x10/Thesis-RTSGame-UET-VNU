@@ -28,8 +28,8 @@ partial struct ZombieSpawnerSystem : ISystem
                 originPosition = localTransform.ValueRO.Position,
                 targetPosition = localTransform.ValueRO.Position,
                 distanceMax = zombieSpawner.ValueRO.randomWalkingDistanceMax,
-               distanceMin = zombieSpawner.ValueRO.randomWalkingDistanceMin,
-               random = new Unity.Mathematics.Random((uint) zombieEntity.Index)
+                distanceMin = zombieSpawner.ValueRO.randomWalkingDistanceMin,
+                random = new Unity.Mathematics.Random((uint)zombieEntity.Index)
             });
         }
     }

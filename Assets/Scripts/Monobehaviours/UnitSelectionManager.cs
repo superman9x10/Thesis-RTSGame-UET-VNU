@@ -14,7 +14,6 @@ public class UnitSelesctionManager : MonoBehaviour
     public event EventHandler OnSelectionAreaEnd;
 
     private Vector2 selectionStartMousePos;
-
     private void Awake()
     {
         Instance = this;
@@ -22,7 +21,7 @@ public class UnitSelesctionManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             selectionStartMousePos = Input.mousePosition;
             OnSelectionAreaStart?.Invoke(this, EventArgs.Empty);

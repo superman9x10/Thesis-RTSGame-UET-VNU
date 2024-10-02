@@ -4,6 +4,7 @@ using UnityEngine;
 public class HealthAuthoring : MonoBehaviour
 {
     public int healthAmount;
+    public int healthAmountMax;
     public class Baker : Baker<HealthAuthoring>
     {
         public override void Bake(HealthAuthoring authoring)
@@ -12,6 +13,7 @@ public class HealthAuthoring : MonoBehaviour
             AddComponent(entity, new Health
             {
                 healthAmount = authoring.healthAmount,
+                healthAmountMax = authoring.healthAmountMax,
             });
         }
     }
@@ -19,4 +21,6 @@ public class HealthAuthoring : MonoBehaviour
 public struct Health : IComponentData
 {
     public int healthAmount;
+    public int healthAmountMax;
+    public bool onHealthChanged;
 }

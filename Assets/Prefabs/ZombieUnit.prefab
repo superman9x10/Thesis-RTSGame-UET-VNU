@@ -87,6 +87,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 4300000, guid: b6815ab17cf31b645b33d7e67d00ce14, type: 2}
+    - target: {fileID: 4783318885866500675, guid: 4dc2e6b2992b27e49b84553fd871b39e, type: 3}
+      propertyPath: healthAmountMax
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5785975656388065284, guid: 4dc2e6b2992b27e49b84553fd871b39e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
