@@ -6,12 +6,19 @@ using Unity.Transforms;
 partial struct ShootAttackSystem : ISystem
 {
     [BurstCompile]
+    public void OnCreate(ref SystemState state)
+    {
+        state.RequireForUpdate<EntitiesReferences>();
+    }
+
+
+    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         EntitiesReferences entitiesReferences = SystemAPI.GetSingleton<EntitiesReferences>();
 
-        foreach((RefRW<LocalTransform> localTransform, RefRW<ShootAttack> shootAttack, RefRO<Target> target, RefRW<UnitMover> unitMover) 
-            in SystemAPI.Query<RefRW<LocalTransform> , RefRW<ShootAttack>, RefRO<Target>, RefRW<UnitMover>>().WithDisabled<MoveOverride>())
+        foreach((RefRW<LocalTransform> localTransform, RefRW<ShootAttack> shootAttack, RefRO<Target> target, RefRW<UnitMover> unitMover, Entity entity) 
+            in SystemAPI.Query<RefRW<LocalTransform> , RefRW<ShootAttack>, RefRO<Target>, RefRW<UnitMover>>().WithDisabled<MoveOverride>().WithEntityAccess())
         {
             if (target.ValueRO.targetEntity == Entity.Null) continue;
 
@@ -36,6 +43,13 @@ partial struct ShootAttackSystem : ISystem
             shootAttack.ValueRW.timer -= SystemAPI.Time.DeltaTime;
             if(shootAttack.ValueRW.timer > 0) continue;
             shootAttack.ValueRW.timer = shootAttack.ValueRW.timerMax;
+
+            RefRW<TargetOverride> entityTargetOverride = SystemAPI.GetComponentRW<TargetOverride>(target.ValueRO.targetEntity);
+            
+            if (entityTargetOverride.ValueRO.targetEntity == Entity.Null)
+            {
+                entityTargetOverride.ValueRW.targetEntity = entity;
+            }
 
             //Spawn bullet
             Entity bulletEntity = state.EntityManager.Instantiate(entitiesReferences.bulletPrefabEntity);
