@@ -583,6 +583,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6026199558245974495, guid: 6bfcc9b23f3c01645a74b7180d2da68c, type: 3}
       insertIndex: 10
       addedObject: {fileID: 566619324}
+    - targetCorrespondingSourceObject: {fileID: 6655137529855032954, guid: 6bfcc9b23f3c01645a74b7180d2da68c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1710851997}
   m_SourcePrefab: {fileID: 100100000, guid: 6bfcc9b23f3c01645a74b7180d2da68c, type: 3}
 --- !u!1 &1039181302 stripped
 GameObject:
@@ -1044,6 +1047,24 @@ MonoBehaviour:
   distanceMax: 3
   distanceMin: 10
   randomSeed: 1
+--- !u!1 &1710851993 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6655137529855032954, guid: 6bfcc9b23f3c01645a74b7180d2da68c, type: 3}
+  m_PrefabInstance: {fileID: 955040213}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1710851997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1710851993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cb292518f06c9f499478fc825b1fe6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soldier_idle: {fileID: 11400000, guid: 6d6886c7eb024784ea147832be814890, type: 2}
 --- !u!1001 &1725807486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1234,6 +1255,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1998074041}
   - {fileID: 722905523}
+  - {fileID: 955040213}
   - {fileID: 215261227}
   - {fileID: 1828469315}
   - {fileID: 686501260}
@@ -1244,6 +1266,5 @@ SceneRoots:
   - {fileID: 1151818283}
   - {fileID: 1116775514}
   - {fileID: 1725807486}
-  - {fileID: 955040213}
   - {fileID: 1435133796}
   - {fileID: 1454656267}

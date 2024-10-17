@@ -19,7 +19,7 @@ partial struct FindTargetSystem : ISystem
         _entityStorageInfoLookup = state.GetEntityStorageInfoLookup();
     }
 
-    [BurstCompile]
+    //[BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         PhysicsWorldSingleton _physicsWorldSingleton = SystemAPI.GetSingleton<PhysicsWorldSingleton>();
@@ -35,6 +35,7 @@ partial struct FindTargetSystem : ISystem
         //FindTargetJob findTargetJob = new FindTargetJob
         //{
         //    deltaTime = SystemAPI.Time.DeltaTime,
+        //    unitLayer = GameAssets.UNIT_LAYER,
         //    physicsWorldSingleton = _physicsWorldSingleton,
         //    collisionWorld = _collisionWorld,
         //    distanceHitList = _distanceHitList,
@@ -126,6 +127,7 @@ partial struct FindTargetSystem : ISystem
 public partial struct FindTargetJob : IJobEntity
 {
     public float deltaTime;
+    public int unitLayer;
 
     [ReadOnly] public PhysicsWorldSingleton physicsWorldSingleton;
     [ReadOnly] public CollisionWorld collisionWorld;
@@ -152,7 +154,7 @@ public partial struct FindTargetJob : IJobEntity
         CollisionFilter collisionFilter = new CollisionFilter
         {
             BelongsTo = ~0u,
-            CollidesWith = 1u << GameAssets.UNIT_LAYER,
+            CollidesWith = 1u << unitLayer,
             GroupIndex = 0
         };
 
