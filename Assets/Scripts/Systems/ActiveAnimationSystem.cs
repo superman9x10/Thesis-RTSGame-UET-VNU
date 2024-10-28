@@ -4,29 +4,35 @@ using Unity.Rendering;
 
 partial struct ActiveAnimationSystem : ISystem
 {
+
+    [BurstCompile]
+    public void OnCreate(ref SystemState state)
+    {
+        state.RequireForUpdate<AnimationDataHolder>();
+    }
+
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
+
+        AnimationDataHolder animationDataHolder = SystemAPI.GetSingleton<AnimationDataHolder>();
+
         foreach ((RefRW<ActiveAnimation> activeAnimation, RefRW<MaterialMeshInfo> materialMeshInfo) in
             SystemAPI.Query<RefRW<ActiveAnimation>, RefRW<MaterialMeshInfo>>())
         {
-            activeAnimation.ValueRW.frameTimer += SystemAPI.Time.DeltaTime;
 
-            if (activeAnimation.ValueRO.frameTimer > activeAnimation.ValueRO.frameTimerMax)
+            if (!activeAnimation.ValueRO.animationDataBlobAssetRef.IsCreated) 
             {
-                activeAnimation.ValueRW.frameTimer -= activeAnimation.ValueRO.frameTimerMax;
-                activeAnimation.ValueRW.frame = (activeAnimation.ValueRW.frame + 1) % activeAnimation.ValueRO.maxFrame;
+                activeAnimation.ValueRW.animationDataBlobAssetRef = animationDataHolder.soldierIdle;
+            }
 
-                switch (activeAnimation.ValueRO.frame)
-                {
-                    case 0:
-                        materialMeshInfo.ValueRW.MeshID = activeAnimation.ValueRO.frame0;
-                        break;
+            activeAnimation.ValueRW.frameTimer += SystemAPI.Time.DeltaTime;
+            if (activeAnimation.ValueRO.frameTimer > activeAnimation.ValueRO.animationDataBlobAssetRef.Value.frameTimerMax)
+            {
+                activeAnimation.ValueRW.frameTimer -= activeAnimation.ValueRO.animationDataBlobAssetRef.Value.frameTimerMax;
+                activeAnimation.ValueRW.frame = (activeAnimation.ValueRW.frame + 1) % activeAnimation.ValueRO.animationDataBlobAssetRef.Value.frameMax;
 
-                    case 1:
-                        materialMeshInfo.ValueRW.MeshID = activeAnimation.ValueRO.frame1;
-                        break;
-                }
+                materialMeshInfo.ValueRW.MeshID = activeAnimation.ValueRO.animationDataBlobAssetRef.Value.batchMeshIdBlobArray[activeAnimation.ValueRO.frame];
             }
         }
     }
