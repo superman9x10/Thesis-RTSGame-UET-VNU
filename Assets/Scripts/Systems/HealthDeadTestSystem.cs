@@ -1,23 +1,35 @@
 using Unity.Burst;
-using Unity.Collections;
 using Unity.Entities;
+using Unity.Collections;
+using UnityEngine;
 
 [UpdateInGroup(typeof(LateSimulationSystemGroup))]
-partial struct HealthDeadTestSystem : ISystem
-{
-    [BurstCompile]
-    public void OnUpdate(ref SystemState state)
-    {
-        EntityCommandBuffer ecb = SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
+partial struct HealthDeadTestSystem : ISystem {
 
-        foreach((RefRO<Health> health, Entity entity) in SystemAPI.Query<RefRO<Health>>().WithEntityAccess())
-        {
-            if(health.ValueRO.healthAmount <= 0)
-            {
-                //This entity is dead
-                ecb.DestroyEntity(entity);
+
+    [BurstCompile]
+    public void OnUpdate(ref SystemState state) {
+        EntityCommandBuffer entityCommandBuffer =
+            SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>().CreateCommandBuffer(state.WorldUnmanaged);
+
+        foreach ((
+            RefRW<Health> health,
+            Entity entity) 
+            in SystemAPI.Query<
+                RefRW<Health>>().WithEntityAccess()) {
+
+            if (health.ValueRO.healthAmount <= 0) {
+                // This entity is dead
+                health.ValueRW.onDead = true;
+                entityCommandBuffer.DestroyEntity(entity);
+
+                if (SystemAPI.HasComponent<BuildingConstruction>(entity)) {
+                    BuildingConstruction buildingConstruction = SystemAPI.GetComponent<BuildingConstruction>(entity);
+                    entityCommandBuffer.DestroyEntity(buildingConstruction.visualEntity);
+                }
             }
         }
     }
+
 
 }

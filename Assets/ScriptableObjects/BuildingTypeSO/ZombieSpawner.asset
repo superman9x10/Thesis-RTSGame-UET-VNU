@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a4cdcdbe80f6a4bb9c42ae3db78174, type: 3}
+  m_Name: ZombieSpawner
+  m_EditorClassIdentifier: 
+  buildingType: 1
+  prefab: {fileID: 4979431483043242857, guid: 74ee81b82c7e3804db96b733838f6e04, type: 3}
