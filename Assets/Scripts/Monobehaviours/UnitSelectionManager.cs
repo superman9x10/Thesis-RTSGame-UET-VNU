@@ -9,7 +9,6 @@ using UnityEngine.EventSystems;
 
 public class UnitSelectionManager : MonoBehaviour {
 
-
     public static UnitSelectionManager Instance { get; private set; }
 
 

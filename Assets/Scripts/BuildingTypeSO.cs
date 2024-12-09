@@ -56,4 +56,18 @@ public class BuildingTypeSO : ScriptableObject {
         }
     }
 
+    public GameObject GetVisualPrefabEntity()
+    {
+        switch (buildingType)
+        {
+            default:
+            case BuildingType.None:
+            case BuildingType.Tower: return GamePrefabManager.Instance.townerPrefab;
+            case BuildingType.Barracks: return GamePrefabManager.Instance.buildingBarrackPrefab;
+            case BuildingType.IronHarvester: return GamePrefabManager.Instance.ironHarvesterPrefab;
+            case BuildingType.GoldHarvester: return GamePrefabManager.Instance.goldHarvesterPrefab;
+            case BuildingType.OilHarvester: return GamePrefabManager.Instance.oilHarvesterPrefab;
+        }
+    }
+
 }

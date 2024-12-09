@@ -258,6 +258,10 @@ PrefabInstance:
       value: SoldierUnit
       objectReference: {fileID: 0}
     - target: {fileID: 3824742252860038454, guid: b558ec2268ee9574687b5faadf1c0e93, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3824742252860038454, guid: b558ec2268ee9574687b5faadf1c0e93, type: 3}
       propertyPath: aimAnimationType
       value: 5
       objectReference: {fileID: 0}

@@ -11,7 +11,8 @@ public class BuildingPlacementManagerUI_ButtonSingle : MonoBehaviour {
     private BuildingTypeSO buildingTypeSO;
 
 
-    public void Setup(BuildingTypeSO buildingTypeSO) {
+    public void Setup(BuildingTypeSO buildingTypeSO) 
+    {
         this.buildingTypeSO = buildingTypeSO;
 
         GetComponent<Button>().onClick.AddListener(() => {

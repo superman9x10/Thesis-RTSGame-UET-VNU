@@ -1,7 +1,9 @@
 using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Rendering;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 partial struct ActiveAnimationSystem : ISystem {
 
@@ -20,9 +22,6 @@ partial struct ActiveAnimationSystem : ISystem {
         };
         activeAnimationJob.ScheduleParallel();
     }
-
-
-
 }
 
 

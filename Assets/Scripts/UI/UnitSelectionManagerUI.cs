@@ -12,7 +12,6 @@ public class UnitSelectionManagerUI : MonoBehaviour {
         UnitSelectionManager.Instance.OnSelectionAreaStart += UnitSelectionManager_OnSelectionAreaStart;
         UnitSelectionManager.Instance.OnSelectionAreaEnd += UnitSelectionManager_OnSelectionAreaEnd;
 
-
         selectionAreaRectTransform.gameObject.SetActive(false);
     }
 

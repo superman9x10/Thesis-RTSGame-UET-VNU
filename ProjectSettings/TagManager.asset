@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Selectable
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -12,13 +14,13 @@ TagManager:
   - Water
   - UI
   - Units
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Buildings
+  - PathfindingWalls
+  - PathfindingHeavy
+  - Minimap
+  - FogOfWar
+  - FogOfWarVisual
+  - Enemy
   - 
   - 
   - 

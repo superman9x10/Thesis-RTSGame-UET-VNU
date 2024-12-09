@@ -21,6 +21,4 @@ public class MouseWorldPosition : MonoBehaviour {
             return Vector3.zero;
         }
     }
-
-
 }
